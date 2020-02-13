@@ -88,5 +88,24 @@ describe('Simple Storage Contract', () => {
         'value set must be able to get'
       );
     });
+
+    it('should have initial value of roll as 0',async()=>{
+      const output=await simpleStorageInstance.functions.rollNumber();
+      //console.log({output});
+      assert.ok(output.eq(0),'rollno should be equal to zero..no initialize');
+    });
+
+    it('update function is called , rollno should be update',async()=>{
+      const output1=await simpleStorageInstance.functions.rollNumber();
+      console.log({output1});
+      const newrollno= 345;
+      const tx=await simpleStorageInstance.functions.setRollno(newrollno);
+
+      const output=await simpleStorageInstance.functions.rollNumber();
+      console.log({output});
+      assert.ok(output.eq(345),'rollno should be updated...');
+    });
+
+
   });
 });

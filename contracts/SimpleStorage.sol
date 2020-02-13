@@ -6,8 +6,10 @@ pragma solidity ^0.6.1;
 
 contract SimpleStorage {
     string _value;
+    uint256 public rollNumber;
 
     event ValueChanged(address indexed author, string oldValue, string newValue);
+    event ValueChanged(address indexed author, uint256 oldValue, uint256 newValue);
 
     constructor(string memory value) public {
         emit ValueChanged(msg.sender, _value, value);
@@ -21,5 +23,9 @@ contract SimpleStorage {
     function setValue(string memory value) public {
         emit ValueChanged(msg.sender, _value, value);
         _value = value;
+    }
+    function setRollno(uint256  _newRollNumber) public {
+        emit ValueChanged(msg.sender, rollNumber,_newRollNumber);
+        rollNumber = _newRollNumber;
     }
 }
